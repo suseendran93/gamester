@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gamester</title>
+  </head>
+  <body>
+    <nav>
+		<div class="navigation">
+			
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a>About</a>
+					<ul>
+						<li><a>Our team</a></li>
+						<li><a>Camp site</a></li>
+						<li><a>Mission</a></li>
+					</ul>
+				</li>
+
+				<li><a>Things to do</a></li>
+				<li><a>Contact</a>
+					<ul>
+						<li><a href="#" target="_blank">Email-us</a></li>
+						<li><a>Map</a></li>
+					</ul>
+				</li>
+				<li><a>News</a></li>
+
+			</ul>
+		</div>
+		
+		<div class="cta">
+			<div class="btn-container">
+				<button id="signup"><a href="signup.html">Sign up</a></button>
+				<button id="signin"><a href="signin.html">Sign in</a></button>
+			</div>
+		</div>
+	</nav>
+	<div class="fixed-headers">
+	<div class="header">
+		<h1>Welcome to Gaming info</h1>
+		<h5>-Everything you need to game</h5>
+	</div>
+	<div class="searchbar">
+		<input type="text" name="searchbar" placeholder="Search...">
+
+	</div>
+	<div class="custom-dropdown">
+		<button class="drop-btn" onclick="showGames()">Category</button>
+		<span>
+			<ul class="drop">
+				<li><a>RPG</a></li>
+				<li><a>FPS</a></li>
+				<li><a>Racing</a></li>
+				<li><a>Free to play</a></li>
+			</ul>
+		</span>
+		
+	</div>
+</div>
+
+	<div id="close" class="close-content">
+	<button  type="button" onclick="hideInfo()">X</button>
+	
+	<div id="RPG" class="gameCategory">
+		<h2>Role playing games</h2>
+		<p>A role-playing game (sometimes spelled roleplaying game; abbreviated RPG) is a game in which players assume the roles of characters in a fictional setting. Players take responsibility for acting out these roles within a narrative, either through literal acting, or through a process of structured decision-making regarding character development.Actions taken within many games succeed or fail according to a formal system of rules and guidelines.
+		</p>
+		<p>There are several forms of role-playing games. The original form, sometimes called the tabletop role-playing game (TRPG), is conducted through discussion, whereas in live action role-playing (LARP), players physically perform their characters' actions.In both of these forms, an arranger called a game master (GM) usually decides on the rules and setting to be used, while acting as the referee; each of the other players takes on the role of a single character.
+		</p>
+		<p>Several varieties of RPG also exist in electronic media, such as multiplayer text-based Multi-User Dungeons (MUDs) and their graphics-based successors, massively multiplayer online role-playing games (MMORPGs). Role-playing games also include single-player role-playing video games in which players control a character, or team of characters, who undertake(s) quests, and may include player capabilities that advance using statistical mechanics. These electronic games sometimes share settings and rules with tabletop RPGs, but emphasize character advancement more than collaborative storytelling.</p>
+		<p>This type of game is well-established, so some RPG-related game forms, such as trading/collectible card games (CCGs) and wargames, may not be included under the definition. Some amount of role-playing activity may be present in such games, but it is not the primary focus.The term role-playing game is also sometimes used to describe games involving roleplay simulation and exercises used in teaching, training, and academic research.</p>
+		</div>
+	<div id="FPS" class="gameCategory">
+		<h2>First person shooting</h2>
+	</div>
+	<div id="Racing" class="gameCategory">
+		<h2>Racing</h2>
+	</div>
+	<div id="Free to play" class="gameCategory">
+		<h2>Free to play</h2>
+	</div>	
+</div>
+	<script src="myscript.js"></script>
+
+    <div id="root">
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
