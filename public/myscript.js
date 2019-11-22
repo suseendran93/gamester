@@ -6,9 +6,6 @@
 	}
 	
 	})();
-	
-
-
 	function hideInfo(){
 	
 		document.getElementById("close").style.display='none';

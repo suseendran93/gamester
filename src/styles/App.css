@@ -1,0 +1,17 @@
+*{box-sizing: border-box;}
+html,body{height:100%;}
+
+body{
+
+	background: url("bg.jpg") no-repeat;			
+	background-image: url("bg.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
+	color: #c9cdd3;
+	font-family: Arial;
+	margin:0px;
+	background-attachment: fixed;
+}
+button:focus{
+  outline: 0;
+  }

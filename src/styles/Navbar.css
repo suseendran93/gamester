@@ -1,0 +1,54 @@
+.navigation{
+    position: fixed;
+    top: 0;
+    left: 0;
+	width: 75%;
+	display: inline-block;
+	
+}.navigation ul::before,.navigation ul::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.navigation ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.navigation li{
+
+	float: left;
+	width: 150px;
+	height: 40px;
+	background-color: black;
+	opacity: .6;
+	line-height: 40px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.navigation ul li a{
+
+	text-decoration: none;
+	color: white;
+	display: block;
+}
+
+.navigation ul li a:hover{
+	background-color:green;
+}
+
+
+.navigation ul li ul li{
+	display: none;
+
+}
+
+.navigation ul li:hover ul li{
+	display: block;
+}
+
+.navigation ul li ul li a:hover{
+	background-color: red;
+}
