@@ -1,0 +1,39 @@
+.custom-dropdown ul li {
+	display: none;
+}
+
+.custom-dropdown button{
+	width: 7%;
+	border: 5px solid black;
+	position: fixed;
+	text-align: center;
+	top: 250px;
+    left: 675px;
+	background:transparent;
+	height: 20px;
+	padding-top: 0px;
+	padding-left: 0px;
+	display: block;
+	color: #ffff99;
+	border-radius: 30%;
+}
+.drop-btn{
+
+	cursor: pointer;
+}
+.drop{
+	width: 10%;
+	position: fixed;
+	text-align: center;
+	margin-top: 18%;
+	margin-left: 117px;
+	margin-right: auto;
+	line-height: 25px;
+	cursor: pointer;
+	padding-top: 0px;
+	padding-left: 0px;
+	z-index: 2;
+}
+.drop a:hover{
+	font-size: 20px;
+}

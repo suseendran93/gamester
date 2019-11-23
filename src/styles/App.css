@@ -15,3 +15,29 @@ body{
 button:focus{
   outline: 0;
   }
+
+.header h1{
+	text-align: center;
+
+}
+.header h5{
+	text-align: center;
+
+}
+
+.fixed-headers{
+	position: relative;
+	left: 35%;
+}
+.header{
+	position: fixed;
+	top: 75px;
+}
+.searchbar{
+	position: fixed;
+	top: 200px;
+	left: 650px;
+	width: 10%;	
+	display: block;
+
+}
