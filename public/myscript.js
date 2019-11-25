@@ -17,7 +17,7 @@
 //Global variable
 	var flag=false;
 //
-	function showGames(){	
+function showGames(){
 		
 		var games=document.querySelectorAll('.drop li');
 		if(flag==false){
@@ -31,7 +31,6 @@
 			
 			for (var i = 0; i < games.length; i++) {
 				games[i].style.display='none';
-				
 			}
 			
 			flag=false;
@@ -75,5 +74,3 @@
 				window.location.href="index.html";
 			}
 		}
-
-		

@@ -19,7 +19,7 @@ class App extends Component {
 	        	<input type="text" name="searchbar" placeholder="Search..."/>
 	        </div>
         </div>
-       
+        <Category />
     </div>
     
   );

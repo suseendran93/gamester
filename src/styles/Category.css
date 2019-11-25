@@ -23,16 +23,15 @@
 }
 .drop{
 	width: 10%;
-	position: fixed;
-	text-align: center;
-	margin-top: 18%;
-	margin-left: 117px;
-	margin-right: auto;
-	line-height: 25px;
-	cursor: pointer;
-	padding-top: 0px;
-	padding-left: 0px;
-	z-index: 2;
+    position: fixed;
+    text-align: center;
+    top: 265px;
+    left: 650px;
+    line-height: 25px;
+    cursor: pointer;
+    padding-top: 0px;
+    padding-left: 0px;
+    z-index: 2;
 }
 .drop a:hover{
 	font-size: 20px;
