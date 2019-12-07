@@ -1,5 +1,11 @@
 .custom-dropdown ul li {
+list-style: none;
+}
+.displayNone{
 	display: none;
+}
+.displayBlock{
+	display: block;
 }
 
 .custom-dropdown button{
