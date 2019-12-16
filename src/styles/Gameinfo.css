@@ -1,7 +1,7 @@
 .close-content button{
 	position: relative;
 	top: 310px;
-	left: 1090px;
+	left: 1050px;
 	background:transparent;
 	border: none;
 	font-family: Arial;
@@ -33,7 +33,7 @@ div.gameCategory {
 p{
 	display: inline-block;
 	text-align: left;
-	width: 50%;
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	color: yellow;

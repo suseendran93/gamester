@@ -9,7 +9,7 @@ class Category extends Component{
 		this.showGames = this.showGames.bind(this);
 		this.findList = this.findList.bind(this);
 		this.state = {
-			flag : false,
+			flag :null,
 			listVal : null 
 		}
         
@@ -19,7 +19,8 @@ class Category extends Component{
 findList(text){
 	console.log(text);
 	this.setState({
-	listVal : text
+	listVal : text,
+	flag : ! this.state.flag
 	})
 }
 	 
@@ -43,7 +44,7 @@ var listValue = [];
 			<ul className={this.state.flag ? "drop displayBlock" : "drop displayNone" }  >
             {listValue}
 			</ul>   
-			<Gameinfo sendPram = {this.state.listVal}/>                     
+			<Gameinfo sendPram = {this.state}/>                     
 	</div>
 
 	    );
