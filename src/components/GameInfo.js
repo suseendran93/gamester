@@ -20,7 +20,7 @@ class Gameinfo extends Component{
     hideInfo(){
 	
         this.setState({
-                    flag1: false
+                    flag1: !this.state.flag1
                        })
         console.log(this.state.flagX);               
         	}

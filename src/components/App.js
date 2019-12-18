@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../styles/App.css';
 import Navbar from './Navbar'
-import Signup from './Signup';
+import SignIn from './SignIn';
 import Category from './Category';
 class App extends Component {
 
@@ -9,7 +9,7 @@ class App extends Component {
   return (
     <div className="App">
       <Navbar />
-      <Signup />
+      <SignIn />
         <div className="fixed-headers">
 	        <div className="header">
 		        <h1>Welcome to Gaming info</h1>
