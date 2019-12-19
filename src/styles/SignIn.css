@@ -1,5 +1,14 @@
-.cta{
+.signin-screen{
 	position: fixed;
+	height: 500px;
+	width: 500px;
+	left: 500px;
+	background: white;
+	box-sizing: border-box;
+	z-index: 10;
+}
+
+.cta{
 	top: 0;
 	right: 0;
 	width: 25%;
@@ -11,7 +20,8 @@
 	
 }
 .btn-container{
-	float: right;
+	position: fixed;
+	right: 0;
 }
 .btn-container button {
 	background:transparent;
