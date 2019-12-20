@@ -8,14 +8,17 @@ class Gameinfo extends Component{
          
          this.hideInfo = this.hideInfo.bind(this);
          this.state = {
-            flag1 : null,
+            flag1 : this.props.sendPram.flag,
+            listVal : this.props.sendPram.listVal  
         }
     }
 
     componentDidMount(){
         
-          
-           // alert("Hello")
+        this.setState({
+            flag1: !this.state.flag1 
+               })
+           alert("Hello");
           
           
       }
@@ -24,33 +27,33 @@ class Gameinfo extends Component{
     hideInfo(){
 	
         this.setState({
-                    flag1: true 
+                    flag1: this.state.flag1 
                        })
         	}
    
     render(){
-        let {listVal,flag}= this.props.sendPram;
+        //let {listVal,flag}= this.props.sendPram;
         return(
         <div className="gameInfo">
-        <div id="close" className={!flag? "close-content displayBlock" : "close-content displayNone"}>
+        <div id="close" className={!this.state.flag1? "close-content displayBlock" : "close-content displayNone"}>
         <button  type="button" onClick={this.hideInfo}>X</button>
         </div>
-        <div className = {!flag ? "gameCategory displayBlock" : "gameCategory displayNone" }>
-        {listVal === "RPG" &&
+        <div className = {!this.state.flag1 ? "gameCategory displayBlock" : "gameCategory displayNone" }>
+        {this.state.listVal === "RPG" &&
        (
         <div    
             dangerouslySetInnerHTML={{
           __html: categoryContent[0].RPG
         }}>            
         </div>)      
-         || listVal === "FPS" &&
+         || this.state.listVal === "FPS" &&
         ( <div    
             dangerouslySetInnerHTML={{
           __html: categoryContent[1].FPS
         }}>            
         </div>)
         
-        || listVal === "Racing" &&
+        || this.state.listVal === "Racing" &&
     
         ( <div    
             dangerouslySetInnerHTML={{
@@ -58,7 +61,7 @@ class Gameinfo extends Component{
         }}>            
         </div>)
 
-        || listVal === "Free to play" &&
+        || this.state.listVal === "Free to play" &&
         
         ( <div    
             dangerouslySetInnerHTML={{

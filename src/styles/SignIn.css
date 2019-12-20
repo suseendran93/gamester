@@ -1,26 +1,18 @@
 .signin-screen{
 	position: fixed;
-	height: 500px;
-	width: 500px;
-	left: 500px;
+	height: 70%;
+	width: 50%;
+	margin: 7% 32%;
 	background: white;
 	box-sizing: border-box;
 	z-index: 10;
 }
 
 .cta{
-	top: 0;
-	right: 0;
-	width: 25%;
-	display: inline-block;
-	height: 40px;
-	margin-left: -10px;
-	padding-left: 10px;
-	line-height: 40px;
-	
+	position: relative;
 }
 .btn-container{
-	position: fixed;
+	position: relative;
 	right: 0;
 }
 .btn-container button {
@@ -30,6 +22,8 @@
 	font-family: Arial;
 	font-size: 20px;
 	text-decoration: underline;
+	position: absolute;
+    right: 0px;
 
 }
 .btn-container button:hover{
