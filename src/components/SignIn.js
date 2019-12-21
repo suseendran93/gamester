@@ -13,25 +13,22 @@ class SignIn extends Component{
         }
     }
 
-
     openSignInWindow(){
             this.setState({
                 toggle: !this.state.toggle
             })
     }
     render(){
-return(
-		
-<div className="cta">
-    <div className="btn-container">
-    <button id="signin" onClick={this.openSignInWindow}><a href="#">Sign in</a></button>
-        <div className={this.state.toggle ?"signin-screen displayBlock":"signin-screen displayNone"}>
-        
+    return(
+        <div className="cta">
+            <div className="btn-container">
+            <button id="signin" onClick={this.openSignInWindow}><a href="#/">Sign in</a></button>
+                <div className={this.state.toggle ?"signin-screen displayBlock":"signin-screen displayNone"}>
+                
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-)
+    )
     }
 }
 
