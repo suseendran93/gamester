@@ -8,22 +8,22 @@ class Navbar extends Component{
          <div className="navigation">			
 			<ul>
 				<li><a href="index.html">Home</a></li>
-				    <li><a>About</a>
+				    <li><a href="#/">About</a>
 					    <ul>
-						    <li><a>Our team</a></li>
-						    <li><a>Camp site</a></li>
-						    <li><a>Mission</a></li>
+						    <li><a href="#/">Our team</a></li>
+						    <li><a href="#/">Camp site</a></li>
+						    <li><a href="#/">Mission</a></li>
 					    </ul>
 				    </li>
 
-				    <li><a>Things to do</a></li>
-				    <li><a>Contact</a>
+				    <li><a href="#/">Things to do</a></li>
+				    <li><a href="#/">Contact</a>
 					    <ul>
-						    <li><a href="#" target="_blank">Email-us</a></li>
-						    <li><a>Map</a></li>
+						    <li><a href="#/" target="_blank">Email-us</a></li>
+						    <li><a href="#/">Map</a></li>
 					    </ul>
 				    </li>
-				    <li><a>News</a></li>
+				    <li><a href="#/">News</a></li>
 			</ul>
 		</div>
         )
