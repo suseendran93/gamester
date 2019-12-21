@@ -22,9 +22,11 @@ class SignIn extends Component{
     return(
         <div className="cta">
             <div className="btn-container">
-            <button id="signin" onClick={this.openSignInWindow}><a href="#/">Sign in</a></button>
+            <button id="signin" onClick={this.openSignInWindow}>Sign in</button>
+            <div id="overlay" className={this.state.toggle ?"signin-screen-overlay displayBlock":"signin-screen-overlay displayNone"}>
                 <div className={this.state.toggle ?"signin-screen displayBlock":"signin-screen displayNone"}>
-                
+                <button id="close-signin" onClick={this.openSignInWindow}>Close</button>
+                </div>
                 </div>
             </div>
         </div>

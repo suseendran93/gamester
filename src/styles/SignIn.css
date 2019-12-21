@@ -1,15 +1,35 @@
+.signin-screen-overlay{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 9;
+}
+
 .signin-screen{
 	position: fixed;
 	height: 70%;
 	width: 50%;
-	margin: 7% 32%;
-	background: white;
-	box-sizing: border-box;
+	margin: 6% 25%;
+	background: url("signinbg.jpg") no-repeat;			
+	background-image: url("signinbg.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
 	z-index: 10;
+}
+
+#close-signin{
+	position: absolute;
+
 }
 
 .cta{
 	position: relative;
+	
 }
 .btn-container{
 	position: relative;
@@ -18,12 +38,13 @@
 .btn-container button {
 	background:transparent;
 	border: none;
-	color: #c9cdd3;
+	color: #611122;
 	font-family: Arial;
 	font-size: 20px;
 	text-decoration: underline;
 	position: absolute;
-    right: 0px;
+	right: 0px;
+	cursor: pointer;
 
 }
 .btn-container button:hover{

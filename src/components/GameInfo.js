@@ -6,9 +6,9 @@ class Gameinfo extends Component{
     constructor(props){
         super(props);
          this.hideInfo = this.hideInfo.bind(this);
-         this.state = {
-           ...props
-         };
+        //  this.state = {
+        //    ...props
+        //  };
     }
 
     hideInfo(){
