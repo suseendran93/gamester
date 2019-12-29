@@ -11,7 +11,7 @@
 }
 
 .signin-screen{
-	position: fixed;
+	position: relative;
 	height: 70%;
 	width: 50%;
 	margin: 6% 25%;
@@ -67,11 +67,13 @@
 }
 .login{
 	position: absolute;
-	top: 60%;
+	top: 65%;
 	left: 45%;
+	
 }
 
 .login button {
+	position: relative;
 	background:transparent;
 	border: none;
 	color: green;
@@ -79,8 +81,7 @@
 	font-size: 20px;
 	text-decoration: underline;	
 	cursor: pointer;
-	top: 60%;
-	left: 45%;
+	
 }
 .login button:hover {
 	font-size: 20px;
@@ -88,10 +89,11 @@
 }
 .create-account{
 	position: absolute;
-	top: 72%;
-	left: 53%;
+	top: 77%;
+    left: 38%;
 }
 .create-account button{
+	position: relative;
 	background:transparent;
 	border: none;
 	color: green;
@@ -99,6 +101,7 @@
 	font-size: 20px;
 	text-decoration: underline;
 	cursor: pointer;
+	
 }
 .create-account button:hover{
 	font-size: 20px;
