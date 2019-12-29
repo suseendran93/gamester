@@ -28,10 +28,13 @@ class SignIn extends Component{
                 
                 <button id="close-signin" onClick={this.openSignInWindow}>Close</button>
                 <div className="username">
-                    <input id="username" type="text" name="username" placeholder="Username"/>
+                    <input id="username" type="text" name="username" placeholder="Username" required/>
                     </div>
                     <div className="password">
-                    <input id="password" type="text" name="password" placeholder="Password"/>
+                    <input id="password" type="password" name="password" placeholder="Password" required/>
+                </div>
+                <div className="login">
+                <button id="login" >Log in</button>
                 </div>
                 <div className="create-account">
                     <a href="#/">Create a new account</a>
