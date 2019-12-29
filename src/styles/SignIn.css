@@ -38,7 +38,7 @@
 .btn-container button {
 	background:transparent;
 	border: none;
-	color: #611122;
+	color: green;
 	font-family: Arial;
 	font-size: 20px;
 	text-decoration: underline;
@@ -48,23 +48,39 @@
 
 }
 .btn-container button:hover{
-	color: green;
-
-}
-
-.btn-container a:visited{
-	color: green;
-}
-
-.btn-container a:link{
-	color: green;
-}
-
-.btn-container a:hover{
 	font-size: 25px;
+
 }
 
+.username {
+    /* display: grid; */
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
 
-
+.password {
+    /* display: grid; */
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+.create-account{
+	position: absolute;
+	top: 70%;
+	left: 38%;
+}
+.create-account a{
+	background:transparent;
+	border: none;
+	color: green;
+	font-family: Arial;
+	font-size: 20px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.create-account a:hover{
+	color: rgb(162, 233, 162);
+}
 
 

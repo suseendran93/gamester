@@ -19,7 +19,7 @@ class Gameinfo extends Component{
         let {listVal, passFlagToChild}= this.props;
         return(
         <div className="gameInfo">
-        <div id="close" className={ passFlagToChild? "close-content displayBlock" : "close-content displayNone"}>
+        <div id="close" className={ passFlagToChild ? "close-content displayBlock" : "close-content displayNone"}>
         <button  type="button" onClick={this.hideInfo}>X</button>
         </div>
         <div className = { passFlagToChild ? "gameCategory displayBlock" : "gameCategory displayNone" }>
