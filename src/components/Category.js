@@ -30,7 +30,11 @@ onCloseBtnPress(){
 
 showGames(){
 	this.setState({
-		flag : !this.state.flag
+		flag : !this.state.flag,
+		
+		passFlagToChild : false //Hide the content whenever u click on category irrespective of flag status
+		
+
 	});
 }
 	
@@ -42,6 +46,8 @@ var listValue = [];
 
     return(
         <div className="custom-dropdown">
+		{console.log(this.state.flag)}
+		{console.log(this.state.passFlagToChild)}
 		<button className="drop-btn" onClick={this.showGames.bind(this)}>Category</button>
 			<ul className={this.state.flag ? "drop displayBlock" : "drop displayNone" }  >
             {listValue}
