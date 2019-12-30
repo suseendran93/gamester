@@ -6,6 +6,13 @@ class CreateAccount extends Component{
         super(props);
         
     }
+
+    render() {
+        return (
+            <div id="accountoverlay" className={this.state.toggle ? "create-account-overlay displayBlock" : "create-account-overlay displayNone"}>  
+            </div>      
+        );
+    }
 }
 
 export default CreateAccount;
