@@ -22,6 +22,7 @@ module.exports = {
                 test: /\.css$/i,
                 exclude: /node_modules/,
                 use: ['style-loader',//3.Inject styles into DOM
+                    MiniCssExtractPlugin.loader,//css files generated will be automatically linked to your HTML
                     'css-loader',   //2.Turns css into common js(Look inside bundle.js)
                     'sass-loader'   //1. Turns sass into css
                 ]
@@ -41,9 +42,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
-        new MiniCssExtractPlugin(
-            {
-            }
-        )
+        new MiniCssExtractPlugin()
     ]
 }
