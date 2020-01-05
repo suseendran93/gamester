@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import '../styles/Navbar.css';
+import App from './App'
 
 class Navbar extends Component{
 
     render(){
         return(
+			<Router>
          <div className="navigation">			
 			<ul>
-				<li><a href="index.html">Home</a></li>
+				<li><Link to={'/home'}>Home</Link></li>
 				    <li><a href="#/">About</a>
 					    <ul>
 						    <li><a href="#/">Our team</a></li>
@@ -25,7 +28,12 @@ class Navbar extends Component{
 				    </li>
 				    <li><a href="#/">News</a></li>
 			</ul>
+			<Switch>
+			<Route exact path='/home' Component={App}/>
+			
+			</Switch>
 		</div>
+		</Router>
         )
     }
 }
