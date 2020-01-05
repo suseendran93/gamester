@@ -6,30 +6,37 @@ import Gameinfo from '../components/GameInfo';
 class Category extends Component{
     constructor(){
 		super();
-		this.showGames = this.showGames.bind(this);
 		this.findList = this.findList.bind(this);
 		this.state = {
 			flag :null,
-			listVal : null 
+			listVal : null,
+			passFlagToChild : false
 		}
-        
 	}
-	
 		
 findList(text){
-	console.log(text);
 	this.setState({
 	listVal : text,
-	flag : ! this.state.flag
-	})
+	flag : !this.state.flag,
+	passFlagToChild : !this.state.passFlagToChild
+	});
 }
-	 
-	 showGames(){
 
-		this.setState({
-			flag : ! this.state.flag
-		})
-	}
+onCloseBtnPress(){
+	this.setState({
+		passFlagToChild : !this.state.passFlagToChild
+	});
+}
+
+showGames(){
+	this.setState({
+		flag : !this.state.flag,
+		
+		passFlagToChild : false //Hide the content whenever u click on category irrespective of flag status
+		
+
+	});
+}
 	
 render(){
 var listValue = [];
@@ -38,16 +45,15 @@ var listValue = [];
 	  }
 
     return(
-
         <div className="custom-dropdown">
-		<button className="drop-btn" onClick={this.showGames}>Category</button>
+		{console.log(this.state.flag)}
+		{console.log(this.state.passFlagToChild)}
+		<button className="drop-btn" onClick={this.showGames.bind(this)}>Category</button>
 			<ul className={this.state.flag ? "drop displayBlock" : "drop displayNone" }  >
             {listValue}
 			</ul>   
-			<Gameinfo sendPram = {this.state}/>                     
-	</div>
-
-	    );
+			<Gameinfo {...this.state} onCloseBtnPress={this.onCloseBtnPress.bind(this)}/>                     
+	</div>);
 }
 }
 
