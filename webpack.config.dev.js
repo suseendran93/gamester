@@ -5,12 +5,12 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = merge(webpackConfig, {
     mode: "development",
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
-	],
-	devtool: "source-map",
-	devServer: {
-		hot: true,
-	}
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+    ],
+    devtool: "source-map",
+    devServer: {
+        hot: true,
+    }
 });
