@@ -22,7 +22,8 @@ class SignIn extends Component {
     }
     openCreateAccountWindow() {
         this.setState({
-            toggleAccount: !this.state.toggleAccount
+            toggleAccount: !this.state.toggleAccount,
+            toggle: false
         })
     }
     render() {
@@ -30,11 +31,11 @@ class SignIn extends Component {
             <div className="cta">
                 <div className="btn-container">
                     <button id="signin" onClick={this.openSignInWindow}>Sign in</button>
-                    <form className="signin-form">
-                        <div id="overlay" className={this.state.toggle ? "signin-screen-overlay displayBlock" : "signin-screen-overlay displayNone"}>
 
-                            <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
+                    <div id="overlay" className={this.state.toggle ? "signin-screen-overlay displayBlock" : "signin-screen-overlay displayNone"}>
 
+                        <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
+                            <form className="signin-form">
                                 <button id="close-signin" onClick={this.openSignInWindow}>Close</button>
                                 <div className="username">
                                     <input id="username" type="text" name="username" placeholder="Username" required />
@@ -45,16 +46,18 @@ class SignIn extends Component {
                                 <div className="login">
                                     <button type="submit" id="login">Log in</button>
                                 </div>
-                                <div className="create-account">
-                                    <button id="createAccount" onClick={this.openCreateAccountWindow.bind(this)} >Create a new account</button>
 
-                                </div>
-
+                            </form>
+                            <div className="create-account">
+                                <button id="createAccount" onClick={this.openCreateAccountWindow.bind(this)} >Create a new account</button>
                             </div>
-
                         </div>
-                    </form>
+
+                    </div>
+
+
                 </div>
+                <CreateAccount {...this.state} openCreateAccountWindow={this.openCreateAccountWindow.bind(this)} />
             </div>
         )
     }

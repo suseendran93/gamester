@@ -1,0 +1,65 @@
+.account-overlay{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 9;
+}
+
+.account-screen{
+	position: relative;
+	height: 70%;
+	width: 50%;
+	margin: 6% 25%;
+	background: url("signinbg.jpg") no-repeat;			
+	background-image: url("signinbg.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
+	z-index: 10;
+}
+.accountusername {
+    /* display: grid; */
+    position: absolute;
+    top: 31%;
+    left: 40%;
+}
+
+.accountpassword {
+    /* display: grid; */
+    position: absolute;
+    top: 43%;
+    left: 40%;
+}
+.accountconfirmpassword {
+    /* display: grid; */
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
+
+.account-submit{
+	position: absolute;
+	top: 65%;
+	left: 45%;
+	
+}
+
+.account-submit button {
+	position: relative;
+	background:transparent;
+	border: none;
+	color: green;
+	font-family: Arial;
+	font-size: 20px;
+	text-decoration: underline;	
+	cursor: pointer;
+	
+}
+.account-submit button:hover {
+	font-size: 20px;
+	color: rgb(162, 233, 162);
+}
