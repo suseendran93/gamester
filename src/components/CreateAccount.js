@@ -16,10 +16,10 @@ class CreateAccount extends Component {
                 <div className={this.props.toggleAccount ? "account-screen displayBlock" : "signin-screen displayNone"}>
                 <form className="createaccount-form">
                     <div className="accountusername">
-                        <input id="username" type="text" name="username" placeholder="Username" required />
+                        <input id="username" type="text" name="accusername" placeholder="Username" required />
                     </div>
                     <div className="accountpassword">
-                        <input id="password" type="password" name="password" placeholder="Password" required />
+                        <input id="password" type="password" name="accpassword" placeholder="Password" required />
                     </div>
                     <div className="accountconfirmpassword">
                         <input id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password" required />

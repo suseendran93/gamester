@@ -35,7 +35,7 @@ class SignIn extends Component {
                     <div id="overlay" className={this.state.toggle ? "signin-screen-overlay displayBlock" : "signin-screen-overlay displayNone"}>
 
                         <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
-                            <form className="signin-form">
+                            <form className="signin-form" action="http://localhost:8082/customers" method="POST">
                                 <button id="close-signin" onClick={this.openSignInWindow}>Close</button>
                                 <div className="username">
                                     <input id="username" type="text" name="username" placeholder="Username" required />
