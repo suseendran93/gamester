@@ -22,9 +22,9 @@ client.connect(err => {
         var myData = new User(req.body);
         console.log(myData);
         collection.insertOne(myData);
-        
 
-       
+
+
     });
     app.listen(port, () => console.log(`Listening on port ${port}...`));
     // client.close();
