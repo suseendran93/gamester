@@ -1,9 +1,14 @@
 
 const express = require('express');
+const { check, validationResult } = require('express-validator');
 const port = process.env.PORT || 8082;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
+<<<<<<< HEAD
+=======
+var str = "";
+>>>>>>> 9a80d55a76e54f4018ce9617efc13132b56c9da8
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -17,23 +22,28 @@ var nameSchema = new mongoose.Schema({
     password: String
 });
 
-console.log("userinfo",nameSchema);
+console.log("userinfo", nameSchema);
 
 var User = mongoose.model("Susee", nameSchema);
 
-app.post('/customers', (req, res) => {
+app.post('/customers', [
+    // username must be an email
+    check('username').isEmail(),
+    // password must be at least 5 chars long
+    check('password').isLength({ min: 5 })],
+    (req, res) => {
 
-    var myData = new User(req.body);
-    console.log(myData);
-    myData.save()
-        .then(item => {
-           res.send(item.username);  
-                 
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
-});
+        var myData = new User(req.body);
+        console.log(myData);
+        myData.save()
+            .then(item => {
+                res.send(item.username);
+
+            })
+            .catch(err => {
+                res.status(400).send("unable to save to database");
+            });
+    });
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
 
