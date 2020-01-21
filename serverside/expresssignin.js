@@ -5,10 +5,7 @@ const port = process.env.PORT || 8082;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-<<<<<<< HEAD
-=======
 var str = "";
->>>>>>> 9a80d55a76e54f4018ce9617efc13132b56c9da8
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
