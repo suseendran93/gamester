@@ -34,14 +34,15 @@ client.connect(err => {
         limit: '50mb',
         parameterLimit: 100000
       }));
-    app.get('http://localhost:8082/customers', (req, res) => res.send("Data reached endpoint"));
+
+      /*Example endpoint*/
+     
+    app.get('/customers', (req, res) => res.send("Data reached endpoint"));
     app.post('http://localhost:8082/customers', [
         // username must be an email
         check('username').isEmail(),
         // password must be at least 5 chars long
-        check('password').isLength({
-            min: 5
-        })
+        check('password').isLength({ min: 5})
     ], (req, res) => {
 
         res.setHeader('Access-Control-Allow-Origin', '*');
