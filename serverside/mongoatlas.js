@@ -24,7 +24,6 @@ client.connect(err => {
         password: String
     });
     var User = mongoose.model("User", nameSchema), myData, errors;
-
     app.use(bodyParser.urlencoded({
         extended: true,
         limit: '50mb',
@@ -53,7 +52,7 @@ client.connect(err => {
         //     });
         // }
         myData = new User(req.body);
-        // console.log(myData);
+         console.log(myData);
         collection.insertOne(myData);
 
     });
