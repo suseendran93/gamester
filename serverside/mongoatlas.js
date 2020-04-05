@@ -9,6 +9,22 @@ const {check, validationResult} = require('express-validator');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+var cors = require('cors');
+
+var whitelist = ['http://example1.com', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    callback(null, true)
+	//if (whitelist.indexOf(origin) !== -1) {
+    //  callback(null, true)
+    //} else {
+    //  callback(new Error('Not allowed by CORS'))
+    //}
+  }
+}
+
+
+
 app.use(bodyParser.json());
 
 const uri = "mongodb+srv://suzeendran:Susee_1993@cluster0-thwgv.mongodb.net/test?retryWrites=true&w=majority";
@@ -23,6 +39,7 @@ client.connect(err => {
         username: String,
         password: String
     });
+	mongoose.Promise = global.Promise;
     var User = mongoose.model("User", nameSchema), myData, errors;
     app.use(bodyParser.urlencoded({
         extended: true,
@@ -35,9 +52,18 @@ client.connect(err => {
       }));
 
       /*Example endpoint*/
-     
+     // Then pass them to cors:
+	app.use(cors(corsOptions));
+
+	app.use(function(req, res, next) {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Credentials", "true");
+		res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+		res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+		next();
+	});
     app.get('/customers', (req, res) => res.send("Data reached endpoint"));
-    app.post('http://localhost:8082/customers', [
+    app.post('/customers', [
         // username must be an email
         check('username').isEmail(),
         // password must be at least 5 chars long
@@ -53,7 +79,17 @@ client.connect(err => {
         // }
         myData = new User(req.body);
          console.log(myData);
-        collection.insertOne(myData);
+        collection.insertOne(myData, function (error, response) {
+			if(error) {
+				console.log('Error occurred while inserting');
+				console.log(response);
+			   // return 
+			} else {
+			   console.log('inserted record', response.ops[0]);
+			   console.log(response);
+			  // return 
+			}
+		});;
 
     });
     app.get('/data', (req, res) => res.send(errors));

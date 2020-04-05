@@ -28,7 +28,7 @@ class SignIn extends Component {
     }
 
         console.log(data);
-        fetch('http://localhost:8082/customers', {
+        return fetch('http://localhost:8082/customers', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ class SignIn extends Component {
             },
             body: JSON.stringify(data),
           })
-          .then((response) => response.json())
+          .then((response) => console.log(response))
           .then((data) => {
             console.log('Success:', data);
           })
