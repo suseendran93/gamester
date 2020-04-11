@@ -23,8 +23,6 @@ var corsOptions = {
   }
 }
 
-
-
 app.use(bodyParser.json());
 
 const uri = "mongodb+srv://suzeendran:Susee_1993@cluster0-thwgv.mongodb.net/test?retryWrites=true&w=majority";
@@ -39,6 +37,7 @@ client.connect(err => {
         username: String,
         password: String
     });
+
 	mongoose.Promise = global.Promise;
     var User = mongoose.model("User", nameSchema), myData, errors;
     app.use(bodyParser.urlencoded({
@@ -53,6 +52,7 @@ client.connect(err => {
 
       /*Example endpoint*/
      // Then pass them to cors:
+     
 	app.use(cors(corsOptions));
 
 	app.use(function(req, res, next) {
@@ -78,7 +78,7 @@ client.connect(err => {
         //     });
         // }
         myData = new User(req.body);
-         console.log(myData);
+        // console.log(myData);
         collection.insertOne(myData, function (error, response) {
 			if(error) {
 				console.log('Error occurred while inserting');
