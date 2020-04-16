@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import '../styles/SignIn.css';
 import '../styles/Category.css';
-import CreateAccount from '../components/CreateAccount';
+import CreateAccount from './CreateAccount';
+import App from './App';
+
 
 class SignIn extends Component {
 
@@ -62,6 +65,7 @@ class SignIn extends Component {
     }
     render() {
         return (
+            <Router>
             <div className="cta">
                 <div className="btn-container">
                     <button id="signin" onClick={this.openSignInWindow}>Sign in</button>
@@ -70,7 +74,7 @@ class SignIn extends Component {
 
                         <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
                             <form className="signin-form" method="POST">
-                                <button id="close-signin" onClick={this.openSignInWindow}>Close</button>
+                            <Link to={'/home'}>    <button id="close-signin" onClick={this.openSignInWindow}>Close</button></Link>
                                 <div className="username">
                                     <input id="username" type="text" name="username" placeholder="Username" required onChange={this.setUserName.bind(this)} value={this.state.Username}/>
                                 </div>
@@ -78,12 +82,12 @@ class SignIn extends Component {
                                     <input id="password" type="password" name="password" placeholder="Password" required onChange={this.setPassword.bind(this)} value={this.state.password}/>
                                 </div>
                                 <div className="login">
-                                    <button type="submit" id="login" onClick={this.postRequest.bind(this)}>Log in</button>
+                                <Link to={'/home'}>  <button type="submit" id="login" onClick={this.postRequest.bind(this)}>Log in</button></Link>
                                 </div>
 
                             </form>
                             <div className="create-account">
-                                <button id="createAccount" onClick={this.openCreateAccountWindow.bind(this)} >Create a new account</button>
+                             <Link to={'/createaccount'}> <button id="createAccount" onClick={this.openCreateAccountWindow.bind(this)} >Create a new account</button></Link>
                             </div>
                         </div>
 
@@ -92,7 +96,19 @@ class SignIn extends Component {
 
                 </div>
                 <CreateAccount {...this.state} openCreateAccountWindow={this.openCreateAccountWindow.bind(this)} />
+                <Switch>
+                <Route exact path='/signin' Component={SignIn}/>
+                </Switch>
+
+                <Switch>
+			        <Route exact path='/home' Component={App}/>
+			    </Switch>
+
+                <Switch>
+			        <Route exact path='/createaccount' Component={CreateAccount}/>
+			    </Switch>
             </div>
+            </Router>
         )
     }
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import '../styles/Navbar.css';
-import App from './App'
+import App from './App';
 
 class Navbar extends Component{
 
@@ -34,7 +34,7 @@ class Navbar extends Component{
 			</Switch>
 		</div>
 		</Router>
-        )
+        );
     }
 }
 

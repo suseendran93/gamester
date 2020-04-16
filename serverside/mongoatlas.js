@@ -8,13 +8,13 @@ const session = require('express-session');
 const uuid = require('uuid/v4');
 const {userValidationRules,validate} = require('./signinfieldvalidation.js');
 const app = express();
-const {
-  check,
-  validationResult
-} = require('express-validator');
+const {check,validationResult} = require('express-validator');
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+//To run server on same Port
 app.use(express.static(__dirname + "/../dist", {
   index: false,
   immutable: true,
@@ -22,6 +22,7 @@ app.use(express.static(__dirname + "/../dist", {
   maxAge: "30d"
 }));
 
+//To eliminate cors issue
 var cors = require('cors');
 
 var whitelist = ['http://example1.com', 'http://example2.com']
@@ -36,8 +37,6 @@ var corsOptions = {
   }
 }
 
-
-
 app.use(bodyParser.json());
 
 const uri = "mongodb+srv://suzeendran:Susee_1993@cluster0-thwgv.mongodb.net/test?retryWrites=true&w=majority";
@@ -50,7 +49,8 @@ client.connect(err => {
   // perform actions on the collection object
   var nameSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    confirmpassword: String
   });
   mongoose.Promise = global.Promise;
   var User = mongoose.model("User", nameSchema),
@@ -68,6 +68,8 @@ client.connect(err => {
   /*Example endpoint*/
   // Then pass them to cors:
   app.use(cors(corsOptions));
+
+  //To get session ID
   app.use(session({
     genid: (req) => {
       console.log('Inside the session middleware')
@@ -96,6 +98,9 @@ client.connect(err => {
     // password must be at least 5 chars long
     check('password').isLength({
       min: 5
+    }),
+    check('confirmpassword').isLength({
+      min: 5
     })
   ], (req, res) => {
 
@@ -110,6 +115,7 @@ client.connect(err => {
       User.create({
         username: req.body.username,
         password: req.body.password,
+        confirmpassword: req.body.confirmpassword
       }).then(user => res.json(user))
     });
 
@@ -134,7 +140,10 @@ client.connect(err => {
   //app.get('/data', (req, res) => res.send(errors));
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/../dist', 'index.html'))
-  })
+  });
+  app.post('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/../dist', 'index.html'))
+  });
   app.listen(port, () => console.log(`Listening on port ${port}...`));
   // client.close();
 });
