@@ -1,130 +1,182 @@
-const express = require('express');
+const express = require("express");
+const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8082;
 const bodyParser = require("body-parser");
+const MongoClient = require("mongodb").MongoClient;
 const mongoose = require("mongoose");
-const path = require('path');
-const MongoClient = require('mongodb').MongoClient;
+const path = require("path");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const dbName = "gamester_dev";
+const colName = "customers";
+const { check, validationResult } = require("express-validator");
+const nodeCleanup = require("node-cleanup");
+const uuid = require('node-uuid');
+//const CircularJSON = require("circular-json");
+
+//import connectMongo from 'connect-mongo';
 const app = express();
-// const session = require('express-session');
-// const uuid = require('uuid/v4');
-const {check, validationResult} = require('express-validator');
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(express.static(__dirname + "/../dist", {
-    index: false, 
-    immutable: true, 
+app.use(
+  express.static(__dirname + "/../dist", {
+    index: false,
+    immutable: true,
     cacheControl: true,
-    maxAge: "30d"
-}));
-var cors = require('cors');
+    maxAge: "30d",
+  })
+);
+var cors = require("cors");
 
-var whitelist = ['http://example1.com', 'http://example2.com']
+var whitelist = ["http://example1.com", "http://example2.com"];
 var corsOptions = {
   origin: function (origin, callback) {
-    callback(null, true)
-	//if (whitelist.indexOf(origin) !== -1) {
+    callback(null, true);
+    //if (whitelist.indexOf(origin) !== -1) {
     //  callback(null, true)
     //} else {
     //  callback(new Error('Not allowed by CORS'))
     //}
-  }
-}
+  },
+};
 
+// Then pass them to cors:
+app.use(cors(corsOptions));
 
-
-app.use(bodyParser.json());
-
-const uri = "mongodb+srv://suzeendran:Susee_1993@cluster0-thwgv.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-    useUnifiedTopology: true
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  next();
 });
 
-client.connect(err => {
-    const collection = client.db("gamester_dev").collection("customers");
-    // perform actions on the collection object
-    var nameSchema = new mongoose.Schema({
-        username: String,
-        password: String
-    });
-	mongoose.Promise = global.Promise;
-    var User = mongoose.model("User", nameSchema), myData, errors;
-    app.use(bodyParser.urlencoded({
-        extended: true,
-        limit: '50mb',
-        parameterLimit: 100000
-      }))
-      app.use(bodyParser.json({
-        limit: '50mb',
-        parameterLimit: 100000
-      }));
+const nameSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  confirmpassword: String,
+});
+var User = mongoose.model("User", nameSchema),
+  myData,
+  errors;
 
-      /*Example endpoint*/
-     // Then pass them to cors:
-	app.use(cors(corsOptions));
+const uri = "mongodb://127.0.0.1:27017";
+//  const uri =  "mongodb+srv://suzeendran:Susee_1993@cluster0-thwgv.mongodb.net/test?retryWrites=true&w=majority";
 
-	app.use(function(req, res, next) {
-		res.setHeader("Access-Control-Allow-Origin", "*");
-		res.setHeader("Access-Control-Allow-Credentials", "true");
-		res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-		res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-		next();
+
+let db;
+
+const client = new MongoClient(uri, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
+
+client.connect((err) => {
+  db = client.db(dbName);
+
+  if (err) return console.log(err);
+
+  console.log(`Connected MongoDB: ${uri}`);
+  console.log(`Database: ${dbName}`);
+
+  db.createCollection(colName, function (err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
   });
-  
-  app.use(session({
-    genid: (req) => {
-      // console.log('Inside the session middleware')
-      // console.log(req.sessionID)
-      return uuid(); // use UUIDs for session IDs
+});
+
+app.use(
+  session({
+    secret: "secretkey",
+    genid: function(req) {
+      return uuid.v4();
     },
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-  }));
-    // app.get('/customers', (req, res) => 
-    {
-      res.send("Data reached endpoint")}
-    );
-    app.post('/customers', [
-        // username must be an email
-        check('username').isEmail(),
-        // password must be at least 5 chars long
-        check('password').isLength({ min: 5})
-    ], (req, res) => {
+    ttl: 100 * 60 * 60 * 2,
+    clear_interval: 900,
+    cookie: {
+      path: "/",
+      httpOnly: true,
+      secure: false,
+      maxAge: 1 * 60 * 1000,
+    },
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      client: client,
+      dbName:dbName,
+      collection: "sessions",
+      ttl: 60 * 30
+    }),
+  })
+);
 
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     return res.status(422).json({
-        //         errors: errors.array()
-        //     });
-        // }
-        myData = new User(req.body);
-       //  console.log(myData);
-        collection.insertOne(myData, function (error, response) {
-			if(error) {
-				console.log('Error occurred while inserting');
-				console.log(response);
-			   // return 
-			} else {
-			 //  console.log('inserted record', response.ops[0]);
-			 //  console.log(response);
-        // return 
-        console.log('Inside the session middleware');
-     //   console.log(req.sessionID);
+// logic to validate cookie and handle authorization to be done here.
+// refer these url      https://decembersoft.com/posts/authenticating-a-session-cookie-in-express-middleware-with-jsonwebtoken/ 
+// to proceed further   https://alligator.io/nodejs/express-cookies/
+// app.all("*", (req,res, next) => {
+//   // cookie doesn't exist redirect to login
+//   if(cookieExist(req.headers.cookie)){
+//     // how to pass to the next layer ? load the routes below code etc..
+//    next(); 
+//   }else{
+//      res.redirect("/login")
+//    }
+//  })
 
-			}
-		});
+nodeCleanup(
+  function (exitCode, signal) {
+    mongoose.disconnect();
+    console.log("Stopping application");
+  },
+  {
+    ctrl_C: "^C",
+  }
+);
+app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.get("/customers", (req, res) => {
+  res.send("Data reached endpoint");
+});
+app.post(
+  "/customers",
+  [
+    // username must be an email
+    check("username").isEmail(),
+    // password must be at least 5 chars long
+    check("password").isLength({ min: 5 }),
+  ],
+  (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    errors = validationResult(req);
+    myData = new User(req.body);
+    db.collection(colName).insertOne(myData, function (error, response) {
+      if (error) {
+        console.log("Error occurred while inserting");
+        console.log(response);
+        res.status(503).send(err);
+      } else {
+        console.log("Inside the session middleware");
+        //console.log("Request: ", CircularJSON.stringify(req));
+        console.log('Cookies: ', req.cookies);
+        console.log('Signed Cookies: ', req.signedCookies);
+        //console.log(JSON.stringify(req.session));
+        req.session.username = req.body.username;
+        res.status(200).send("OK");
 
+      }
     });
-    
-    app.get('/data', (req, res) => {
-      res.send(errors)}
-      );
-      app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, '/../dist', 'index.html'))
-      });
-    app.listen(port, () => console.log(`Listening on port ${port}...`));
-    // client.close();
+  }
+);
+
+app.get("/data", (req, res) => {
+  res.send(errors);
+});
+app.get("/", (req, res) => {
+  console.log(JSON.stringify(req.session));
+  console.log("Request received");
+  res.sendFile(path.join(__dirname, "/../dist", "index.html"));
 });
