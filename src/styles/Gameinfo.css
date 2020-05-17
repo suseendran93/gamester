@@ -40,3 +40,9 @@ p{
 	font-weight: bold;
 
 }
+
+#enter{
+	position: relative;
+	top: 288px;
+    left: 725px;
+}

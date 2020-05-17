@@ -10,7 +10,7 @@ class Navbar extends Component{
 			<Router>
          <div className="navigation">			
 			<ul>
-				<li><Link to={'/home'}>Home</Link></li>
+				<li><Link to={'/'}>Home</Link></li>
 				    <li><a href="#/">About</a>
 					    <ul>
 						    <li><a href="#/">Our team</a></li>
@@ -29,7 +29,7 @@ class Navbar extends Component{
 				    <li><a href="#/">News</a></li>
 			</ul>
 			<Switch>
-			<Route exact path='/home' Component={App}/>
+			<Route exact path='/' Component={App}/>
 			
 			</Switch>
 		</div>

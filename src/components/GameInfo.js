@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import '../styles/Gameinfo.css';
 import GameContent from '../Jsons/GameContent';
+import GameTiles from './GameTiles';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 const categoryContent= GameContent.category;
 class Gameinfo extends Component{
     constructor(props){
@@ -18,6 +20,7 @@ class Gameinfo extends Component{
     render(){
         let {listVal, passFlagToChild}= this.props;
         return(
+          <Router>
         <div className="gameInfo">
         <div id="close" className={ passFlagToChild ? "close-content displayBlock" : "close-content displayNone"}>
         <button  type="button" onClick={this.hideInfo}>X</button>
@@ -54,8 +57,17 @@ class Gameinfo extends Component{
         </div>)
         
         }
+        
         </div>
+        <div className = { passFlagToChild ? "entergame displayBlock" : "entergame displayNone" }>
+      <Link to={'/games'}> <button id='enter'>Enter</button></Link> 
         </div>
+        <Switch>
+			<Route exact path='/games' Component={GameTiles}/>
+			
+			</Switch>
+        </div>
+        </Router>
         );
          
     }

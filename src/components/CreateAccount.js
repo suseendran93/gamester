@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/SignIn.css';
 import '../styles/CreateAccount.css';
 import App from './App';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -11,7 +12,6 @@ class CreateAccount extends Component {
             Username:"",
             password:"",
             confirmpassword:""
-
         }
         
     }
@@ -72,12 +72,14 @@ class CreateAccount extends Component {
     render() {
 
         let { toggleAccount } = this.props;
-        console.log(this.props.toggleAccount);
         return (
             <Router>
             <div id="accountoverlay" className={this.props.toggleAccount ? "account-overlay displayBlock" : "account-overlay displayNone"}>
                 <div className={this.props.toggleAccount ? "account-screen displayBlock" : "signin-screen displayNone"}>
                 <form className="createaccount-form" method="POST">
+                <div className="btn-container">
+                <Link to={'/'}><button id="close-signin" onClick={this.props.openCreateAccountWindow.bind(this)}>Close</button></Link>
+                </div>
                     <div className="accountusername">
                         <input id="username" type="text" name="username" placeholder="Username" required onChange={this.setUserName.bind(this)} value={this.state.Username}/>
                     </div>
@@ -88,12 +90,12 @@ class CreateAccount extends Component {
                         <input id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password" required onChange={this.setConfirmPassword.bind(this)} value={this.state.confirmpassword}/>
                     </div>
                     <div className="account-submit">
-                                  <Link to={'/home'}>  <button type="submit" id="login" onClick={this.comparePassword.bind(this)}>Submit</button></Link>
+                                  <Link to={'/'}>  <button type="submit" id="login" onClick={this.comparePassword.bind(this)}>Submit</button></Link>
                                 </div>
                     </form>
                 </div>
                 <Switch>
-			        <Route exact path='/home' Component={App}/>
+			        <Route exact path='/' Component={App}/>
 			    </Switch>
             </div>
             </Router>

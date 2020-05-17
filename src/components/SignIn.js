@@ -10,7 +10,6 @@ class SignIn extends Component {
 
     constructor() {
         super();
-        this.openSignInWindow = this.openSignInWindow.bind(this);
         this.state = {
             toggle: null,
             toggleAccount: null
@@ -30,14 +29,15 @@ class SignIn extends Component {
             "password": this.state.password
     }
 
-        console.log(data);
-        return fetch('http://localhost:8082/customers', {
+        console.log("This is the data: "+data);
+        return fetch('http://localhost:8082/login', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin':'*'
             },
             body: JSON.stringify(data),
+            
           })
           .then((response) => console.log(response))
           .then((data) => {
@@ -68,13 +68,13 @@ class SignIn extends Component {
             <Router>
             <div className="cta">
                 <div className="btn-container">
-                    <button id="signin" onClick={this.openSignInWindow}>Sign in</button>
+                <Link to={'/signin'}><button id="signin" onClick={this.openSignInWindow.bind(this)}>Sign in</button></Link>
 
                     <div id="overlay" className={this.state.toggle ? "signin-screen-overlay displayBlock" : "signin-screen-overlay displayNone"}>
 
                         <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
-                            <form className="signin-form" method="POST">
-                            <Link to={'/home'}>    <button id="close-signin" onClick={this.openSignInWindow}>Close</button></Link>
+                            <form className="signin-form" method="GET">
+                            <Link to={'/'}>    <button id="close-signin" onClick={this.openSignInWindow.bind(this)}>Close</button></Link>
                                 <div className="username">
                                     <input id="username" type="text" name="username" placeholder="Username" required onChange={this.setUserName.bind(this)} value={this.state.Username}/>
                                 </div>
@@ -82,7 +82,7 @@ class SignIn extends Component {
                                     <input id="password" type="password" name="password" placeholder="Password" required onChange={this.setPassword.bind(this)} value={this.state.password}/>
                                 </div>
                                 <div className="login">
-                                <Link to={'/home'}>  <button type="submit" id="login" onClick={this.postRequest.bind(this)}>Log in</button></Link>
+                                <Link to={'/'}>  <button type="submit" id="login" onClick={this.postRequest.bind(this)}>Log in</button></Link>
                                 </div>
 
                             </form>
@@ -101,7 +101,7 @@ class SignIn extends Component {
                 </Switch>
 
                 <Switch>
-			        <Route exact path='/home' Component={App}/>
+			        <Route exact path='/' Component={App}/>
 			    </Switch>
 
                 <Switch>
