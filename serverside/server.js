@@ -39,8 +39,10 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: sessionStore,
+  clear_interval: 900,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 //Equals 1 day
+    maxAge: 1000 * 60 //Equals 1 day
+    
   }
 }));
 //session store-end
@@ -148,6 +150,7 @@ client.connect(err => {
         //res.redirect('/login');
       } else {
         console.log("Sess ID:" + req.sessionID);
+        res.set('SessID', req.sessionID);
         res.header('SessID', req.sessionID);
        res.send(200, `User found, successfully signed in, Welcome`);
         //req.session.userID = req.body.username;
@@ -156,6 +159,25 @@ client.connect(err => {
       }
     })
   });
+  app.get('/', (req, res) => {
+   if (req.session.views) {
+    req.session.views++
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<p>views: ' + req.session.views + '</p>')
+    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+    res.end()
+  } else {
+    req.session.views = 1
+    res.end('welcome to the session demo. refresh!')
+  }
+  });
+//   app.get('*', function(req, res, next) {
+
+//     if(!isvalidSession(req.sessid)){
+//      return res.send(401);
+//     }
+//     return next();
+//  });
 
   app.listen(port, () => console.log(`Listening on port ${port}...`));
   // client.close();

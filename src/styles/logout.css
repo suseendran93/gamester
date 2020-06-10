@@ -1,0 +1,20 @@
+.logout-btn-container{
+	position: relative;
+	right: 0;
+}
+.logout-btn-container button {
+	background:transparent;
+	border: none;
+	color: green;
+	font-family: Arial;
+	font-size: 20px;
+	text-decoration: underline;
+	position: absolute;
+	right: 0px;
+	cursor: pointer;
+
+}
+.logout-btn-container button:hover{
+	font-size: 25px;
+
+}

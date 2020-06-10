@@ -2,10 +2,12 @@
     position: fixed;
     top: 0;
     left: 0;
-	width: 75%;
+	width: 49%;
 	display: inline-block;
 	
-}.navigation ul::before,.navigation ul::after{
+}
+
+.navigation ul::before,.navigation ul::after{
 	content: "";
 	display: table;
 	clear: both;

@@ -3,20 +3,31 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import '../styles/SignIn.css';
 import '../styles/Category.css';
 import CreateAccount from './CreateAccount';
+import Userpage from './Userpage';
 import App from './App';
+import { json } from 'body-parser';
 
 
 class SignIn extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.openUserWindow=this.openUserWindow.bind(this);
         this.state = {
+            toggleUser: false,
             toggle: null,
-            toggleAccount: null
+            toggleAccount: null,
+            usersession: null
 
         }
     }
-
+    openUserWindow(usersession) {
+        this.setState({
+            toggleUser: !this.state.toggleUser,
+            usersession: usersession
+           
+        })
+    }
     openSignInWindow() {
         this.setState({
             toggle: !this.state.toggle
@@ -39,12 +50,21 @@ class SignIn extends Component {
             body: JSON.stringify(data),
             
           })
-          .then((response) => console.log(response))
           .then((data) => {
             console.log('Success:', data);
+            if(data.status===404){
+            alert("Login failed, User not found")
+            }
+            else{
+            console.log(data.headers.get('SessID'));
+            const usersession=data.headers.get('SessID');
+            this.openSignInWindow();
+            this.openUserWindow(usersession);
+            }
           })
           .catch((error) => {
             console.error('Error:', error);
+           
           });
     }
     openCreateAccountWindow() {
@@ -64,12 +84,12 @@ class SignIn extends Component {
         }) 
     }
     render() {
-        return (
+        let html=(
+            
             <Router>
-            <div className="cta">
-                <div className="btn-container">
-                <Link to={'/signin'}><button id="signin" onClick={this.openSignInWindow.bind(this)}>Sign in</button></Link>
-
+            <div className="top-menubar">
+                <span className="btn-container">
+                {this.state.toggleUser?<button id='username'>{this.state.Username}</button>:<Link to={'/signin'}><button id="signin" onClick={this.openSignInWindow.bind(this)}>Sign in</button></Link>}
                     <div id="overlay" className={this.state.toggle ? "signin-screen-overlay displayBlock" : "signin-screen-overlay displayNone"}>
 
                         <div className={this.state.toggle ? "signin-screen displayBlock" : "signin-screen displayNone"}>
@@ -82,7 +102,10 @@ class SignIn extends Component {
                                     <input id="password" type="password" name="password" placeholder="Password" required onChange={this.setPassword.bind(this)} value={this.state.password}/>
                                 </div>
                                 <div className="login">
+                              
                                 <Link to={'/'}>  <button type="submit" id="login" onClick={this.postRequest.bind(this)}>Log in</button></Link>
+                                
+                                
                                 </div>
 
                             </form>
@@ -94,8 +117,13 @@ class SignIn extends Component {
                     </div>
 
 
-                </div>
+                </span>
+                {/* {this.state.toggleAccount?<CreateAccount {...this.state} openCreateAccountWindow={this.openCreateAccountWindow.bind(this)} />:""} */}
                 <CreateAccount {...this.state} openCreateAccountWindow={this.openCreateAccountWindow.bind(this)} />
+               
+               {/* {this.state.toggleUser?<Userpage  ta={this.state.toggleUser} openuserWindow={this.openUserWindow}></Userpage>:""} */}
+               {this.state.toggleUser?<Userpage usersession={this.state.usersession}></Userpage>:""}
+               
                 <Switch>
                 <Route exact path='/signin' Component={SignIn}/>
                 </Switch>
@@ -107,9 +135,16 @@ class SignIn extends Component {
                 <Switch>
 			        <Route exact path='/createaccount' Component={CreateAccount}/>
 			    </Switch>
+                <Switch>
+			        <Route exact path='/user' Component={Userpage}/>
+			    </Switch>
             </div>
             </Router>
         )
+            
+        
+        
+        return html;
     }
 }
 

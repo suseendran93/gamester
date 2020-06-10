@@ -8,7 +8,8 @@ class Navbar extends Component{
     render(){
         return(
 			<Router>
-         <div className="navigation">			
+			<div className="top-menubar">
+         <span className="navigation">			
 			<ul>
 				<li><Link to={'/'}>Home</Link></li>
 				    <li><a href="#/">About</a>
@@ -32,6 +33,7 @@ class Navbar extends Component{
 			<Route exact path='/' Component={App}/>
 			
 			</Switch>
+		</span>
 		</div>
 		</Router>
         );

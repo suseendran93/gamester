@@ -7,8 +7,8 @@ import Category from './Category';
 class App extends Component {
 
   render(){
-  return (
-    <div className="App">
+    let html=(
+      <div className="App">
       <Navbar />
       <SignIn />
         <div className="fixed-headers">
@@ -22,8 +22,8 @@ class App extends Component {
         </div>
         <Category />
     </div>
-    
-  );
+    )
+  return html;
   }
 }
 

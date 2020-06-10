@@ -27,7 +27,7 @@
 
 }
 
-.cta{
+.top-menubar{
 	position: relative;
 	
 }
@@ -42,9 +42,9 @@
 	font-family: Arial;
 	font-size: 20px;
 	text-decoration: underline;
-	position: absolute;
 	right: 0px;
 	cursor: pointer;
+	width: 80px;
 
 }
 .btn-container button:hover{
